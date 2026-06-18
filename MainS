@@ -33,3 +33,5 @@ end
 -- After this point, run the main script separately.
 -- The main script expects _G.__TerdsakRayfield to already exist.
 
+loadstring(game:HttpGet("https://raw.githubusercontent.com/kokowe3012/AnimeSquadronTHUB/refs/heads/main/Auth"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/kokowe3012/AnimeSquadronTHUB/refs/heads/main/script"))()
