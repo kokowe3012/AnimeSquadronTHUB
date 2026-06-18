@@ -1,0 +1,34 @@
+if not game:IsLoaded() then
+    game.Loaded:Wait()
+end
+
+-- ================================================================
+--  TerdsakHUB Loader
+--  Purpose:
+--    1) Load the external UI library safely.
+--    2) Expose it to the main script through _G.
+--    3) Keep the risky dynamic loader out of the obfuscated core.
+-- ================================================================
+
+local function loadRayfield()
+    local ok, Rayfield = pcall(function()
+        return loadstring(game:HttpGet("https://sirius.menu/rayfield"))()
+    end)
+
+    if not ok or not Rayfield or type(Rayfield.CreateWindow) ~= "function" then
+        warn("[TerdsakHUB Loader] Failed to load Rayfield.")
+        return false
+    end
+
+    _G.__TerdsakRayfield = Rayfield
+    _G.__TerdsakHubLoaderReady = true
+    print("[TerdsakHUB Loader] Rayfield loaded successfully.")
+    return true
+end
+
+if not loadRayfield() then
+    return
+end
+
+-- After this point, run the main script separately.
+-- The main script expects _G.__TerdsakRayfield to already exist.
